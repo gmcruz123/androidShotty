@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_img">190dp</dimen>
+    <dimen name="Pad_title_login">10dp</dimen>
+    <dimen name="medium">20dp</dimen>
+    <dimen name="template_img">170dp</dimen>
+    <dimen name="dime_icons">24dp</dimen>
+    <dimen name="small">10dp</dimen>
+    <dimen name="icon">30dp</dimen>
+</resources>

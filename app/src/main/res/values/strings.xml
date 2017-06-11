@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ShottyApp</string>
+    <string name="title_login">Bienvenido</string>
+    <string name="registrate">Registrate</string>
+    <string name="entrar">Entrar</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Password</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="nav_home">Inicio</string>
+    <string name="nav_restaurante">Restaurante / Bar</string>
+    <string name="nav_discotecas">Discotecas</string>
+    <string name="nav_promo">Promociones</string>
+    <string name="nav_reserva">Reservaciones</string>
+    <string name="nav_logout">Cerrar Sesion</string>
+    <string name="open_menu">Menu Abierto</string>
+    <string name="close_menu">Menu Cerrado</string>
+    <string name="nav_profile">Profile</string>
+    <string name="eventos">Eventos</string>
+    <string name="restaurante">Restaurante / Bar</string>
+    <string name="discotecas">Discotecas</string>
+    <string name="promociones">Promociones</string>
+    <string name="reservas">Reservas</string>
+    <string name="synopsis">detalle</string>
+
+
+</resources>
