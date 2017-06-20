@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.BoolRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -58,6 +59,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
     ReservaClient client2;
     SharedPreferences preferences;
     ReservaDao dao;
+    public static  List<Reserva> all = new ArrayList<Reserva>();
 
 
     @Override
@@ -225,7 +227,8 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
 
     private void loadReservas() {
-        String idusu = preferences.getString(Preference.KEY_USERID, "");
+        all.removeAll(all);
+        final String idusu = preferences.getString(Preference.KEY_USERID, "");
         Call<List<Reserva>> request = client2.allReservas(idusu);
         request.enqueue(new Callback<List<Reserva>>() {
             @Override
@@ -241,7 +244,33 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
             @Override
             public void onFailure(Call<List<Reserva>> call, Throwable t) {
                 Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
-                List<Reserva> all = dao.loadAll();
+                Log.d("bueno",""+dao.loadAll().size());
+
+
+
+
+               for (int i=0 ; i<dao.loadAll().size(); i++) {
+
+                   Boolean ver = false;
+
+
+                   for (int j=0; j<all.size();j++) {
+                       if (dao.loadAll().get(i).getId().equals(all.get(j).getId())) {
+                           ver = true;
+                       }
+                   }
+
+
+                   if (ver == false) {
+
+                       if (dao.loadAll().get(i).getIdUsu().equals(idusu)) {
+
+                           all.add(dao.loadAll().get(i));
+                           Log.d("holanda", "da");
+                       }
+                   }
+               }
+
                 Data.reservas = all;
                 adapter2.setData(Data.reservas);
 

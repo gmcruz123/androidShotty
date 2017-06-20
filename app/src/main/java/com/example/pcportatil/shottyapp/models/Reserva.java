@@ -56,6 +56,8 @@ public class Reserva {
     public Reserva() {
     }
 
+
+
     public void setLugar(String lugar) {
         this.lugar = lugar;
     }

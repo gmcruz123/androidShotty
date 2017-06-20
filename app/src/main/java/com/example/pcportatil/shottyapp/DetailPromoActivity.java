@@ -19,6 +19,7 @@ public class DetailPromoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_promo);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_detail_promo);
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
      if (getIntent().getExtras() != null) {
 

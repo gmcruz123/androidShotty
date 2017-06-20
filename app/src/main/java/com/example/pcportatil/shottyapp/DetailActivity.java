@@ -354,7 +354,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         String idusu = preferences.getString(Preference.KEY_USERID,"");
 
         opcion = opciones.getSelectedItem().toString();
-        Reserva reserva = new Reserva(lugar, imagen, fechafinal, horafinal, personas.getText().toString(), opcion, idusu);
+        Reserva reserva = new Reserva( lugar, imagen, fechafinal, horafinal, personas.getText().toString(), opcion,idusu);
 
 
         if (response.isSuccessful()){

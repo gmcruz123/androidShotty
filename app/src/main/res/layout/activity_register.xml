@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:src="@drawable/login_bg"
+                android:src="@drawable/resta"
                 android:scaleType="centerCrop" />
 
             <TextView
