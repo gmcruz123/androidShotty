@@ -40,7 +40,8 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/button3"
+                    android:onClick="@{(view)-> restaurante.tipo==1? handler.onMapaClick((int)view.tag,1): handler.onMapaClick((int)view.tag,2) }"
+                    android:id="@+id/mapa"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -57,6 +58,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
                 <Button
+                    android:onClick="@{(view)-> restaurante.tipo==1? handler.onLikesClick((int)view.tag,1): handler.onLikesClick((int)view.tag,2) }"
                     android:id="@+id/like"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
@@ -137,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-1dp"
                     android:layout_marginLeft="8dp"
-                    android:text="@{restaurante.likes}"
+                    android:text='@{restaurante.likes+""}'
                     app:layout_constraintBottom_toBottomOf="@+id/imageView13"
                     app:layout_constraintLeft_toRightOf="@+id/imageView13"
                     tools:text="likes" />

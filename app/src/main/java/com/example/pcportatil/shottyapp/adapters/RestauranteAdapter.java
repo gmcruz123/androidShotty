@@ -24,14 +24,29 @@ public class RestauranteAdapter  extends  RecyclerView.Adapter<RestauranteAdapte
 
     }
 
+
+    public interface onButtonListener{
+        void onButtonClick(int position, int tipoArray);
+
+    }
+
+
+    public interface onLikesListener{
+        void onLikesClick(int position, int tipoArray);
+    }
+
     LayoutInflater inflater;
     List<Restaurante> data;
     onRestauranteListener listener;
+    onButtonListener listenerButton;
+    onLikesListener likesListener;
 
-    public RestauranteAdapter(LayoutInflater inflater, List<Restaurante> data, onRestauranteListener listener) {
+    public RestauranteAdapter(LayoutInflater inflater, List<Restaurante> data, onRestauranteListener listener,onButtonListener listenerButton, onLikesListener likesListener) {
         this.inflater = inflater;
         this.data = data;
         this.listener = listener;
+        this.listenerButton = listenerButton;
+        this.likesListener = likesListener;
     }
 
 
@@ -47,6 +62,8 @@ public class RestauranteAdapter  extends  RecyclerView.Adapter<RestauranteAdapte
     public void onBindViewHolder(RestauranteHolder holder, int position) {
         holder.binding.setRestaurante(data.get(position));
         holder.binding.card.setTag(position);
+        holder.binding.mapa.setTag(position);
+        holder.binding.like.setTag(position);
         holder.binding.setHandler(this);
             //llena los datos
     }
@@ -56,12 +73,35 @@ public class RestauranteAdapter  extends  RecyclerView.Adapter<RestauranteAdapte
         return data.size();
     }
 
+
+
+    //region onItemClick
     public void onItemClick(int position, int tipoarray){
 
         listener.onRestauranteClick(position, tipoarray);
 
 
     }
+    //endregion
+
+    public void onMapaClick(int position, int tipoarray){
+        Log.d("Holalll",""+position);
+        listenerButton.onButtonClick(position,tipoarray);
+
+    }
+
+
+    public void onLikesClick(int position, int tipoArray){
+        likesListener.onLikesClick(position,tipoArray);
+    }
+
+
+
+    public void  setData(List<Restaurante> data){
+        this.data = data;
+        notifyDataSetChanged();}
+
+
 
     //region View Holders
 

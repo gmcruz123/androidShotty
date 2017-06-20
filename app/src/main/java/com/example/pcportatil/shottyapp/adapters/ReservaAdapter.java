@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.pcportatil.shottyapp.R;
 import com.example.pcportatil.shottyapp.databinding.TemplateReservacionesBinding;
 import com.example.pcportatil.shottyapp.models.Reserva;
+import com.example.pcportatil.shottyapp.models.Restaurante;
 
 import java.util.List;
 
@@ -37,6 +38,10 @@ public class ReservaAdapter extends  RecyclerView.Adapter<ReservaAdapter.Reserva
     public void onBindViewHolder(ReservaHolder holder, int position) {
         holder.binding.setReserva(data.get(position));
     }
+
+    public void  setData(List<Reserva> data){
+        this.data = data;
+        notifyDataSetChanged();}
 
     @Override
     public int getItemCount() {

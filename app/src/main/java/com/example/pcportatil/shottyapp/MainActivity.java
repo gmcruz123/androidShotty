@@ -1,6 +1,7 @@
 package com.example.pcportatil.shottyapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,11 +18,15 @@ import android.widget.ToggleButton;
 
 import com.example.pcportatil.shottyapp.databinding.ActivityMainBinding;
 import com.example.pcportatil.shottyapp.fragments.MainFragment;
+import com.example.pcportatil.shottyapp.models.Restaurante;
+import com.example.pcportatil.shottyapp.net.RestaurantesClient;
+import com.example.pcportatil.shottyapp.util.Preference;
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener {
 
     ActivityMainBinding binding;
     ActionBarDrawerToggle toggle;
+    RestaurantesClient client;
     int content;
 
     @Override
@@ -33,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         toggle = new ActionBarDrawerToggle(this, binding.drawer, R.string.open_menu, R.string.close_menu);
         binding.drawer.addDrawerListener(this);
         binding.nav.setNavigationItemSelectedListener(this);
-
         content = R.id.nav_home;
         if (savedInstanceState != null){
 
@@ -133,11 +137,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         break;
         case R.id.nav_reserva:
         getSupportActionBar().setTitle(R.string.reservas);
-        putFragment(R.id.container, MainFragment.instance(3,1));
+        putFragment(R.id.container, MainFragment.instance(3,5));
 
         break;
 
         case R.id.nav_exit:
+            SharedPreferences preferences = getSharedPreferences(Preference.PREFERENCE_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(Preference.KEY_LOGGED,false);
+            editor.apply();
             Intent intent = new Intent(this,LoginActivity.class);
             startActivity(intent);
             finish();
@@ -148,6 +156,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
     }
+
+    public void hola(){}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

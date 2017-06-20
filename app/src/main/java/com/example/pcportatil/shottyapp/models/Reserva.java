@@ -5,7 +5,17 @@ package com.example.pcportatil.shottyapp.models;
  */
 
 public class Reserva {
-    String lugar, imagen, fecha, hora, personas, ocasion, idusuario;
+    String lugar, imagen, fecha, hora, personas, ocasion, idUsu;
+
+    public Reserva(String lugar, String imagen, String fecha, String hora, String personas, String ocasion, String idUsu) {
+        this.lugar = lugar;
+        this.imagen = imagen;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.personas = personas;
+        this.ocasion = ocasion;
+        this.idUsu = idUsu;
+    }
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
@@ -31,8 +41,8 @@ public class Reserva {
         this.ocasion = ocasion;
     }
 
-    public void setIdusuario(String idusuario) {
-        this.idusuario = idusuario;
+    public void setIdUsu(String idUsu) {
+        this.idUsu = idUsu;
     }
 
     public String getLugar() {
@@ -59,7 +69,7 @@ public class Reserva {
         return ocasion;
     }
 
-    public String getIdusuario() {
-        return idusuario;
+    public String getIdUsu() {
+        return idUsu;
     }
 }

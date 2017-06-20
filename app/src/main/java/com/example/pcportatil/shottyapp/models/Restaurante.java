@@ -6,8 +6,25 @@ package com.example.pcportatil.shottyapp.models;
 
 public class Restaurante {
 
-    String nombre, placeid, imagen,likes;
-    int tipo;
+    String nombre, placeid, imagen;
+    int tipo, likes;
+    float latitud, longitud;
+
+    public float getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(float latitud) {
+        this.latitud = latitud;
+    }
+
+    public float getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(float longitud) {
+        this.longitud = longitud;
+    }
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
@@ -30,7 +47,7 @@ public class Restaurante {
         this.imagen = imagen;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(int likes) {
         this.likes = likes;
     }
 
@@ -46,7 +63,7 @@ public class Restaurante {
         return imagen;
     }
 
-    public String getLikes() {
+    public int getLikes() {
         return likes;
     }
 }

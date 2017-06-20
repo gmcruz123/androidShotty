@@ -61,6 +61,11 @@ public class PromoAdapter extends RecyclerView.Adapter<PromoAdapter.PromoHolder>
 
     }
 
+    public void  setData(List<PromoEvento> data){
+        this.data = data;
+        notifyDataSetChanged();}
+
+
     //region view Holder
     static  class PromoHolder extends RecyclerView.ViewHolder{
 

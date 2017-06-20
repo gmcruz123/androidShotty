@@ -27,14 +27,14 @@ public class DetailPromoActivity extends AppCompatActivity {
             Log.d("pos1 :", pos1+"pos2 :"+pos3);
 
             if (pos1 == -1){
-                PromoEvento promo = Data.getPromoEventos(4).get(pos3);
+                PromoEvento promo = Data.eventos.get(pos3);
                 Log.d("mama", promo.getFecha());
                 binding.setPromoevento(promo);
 
             }
 
             else{
-               PromoEvento promo= Data.getPromoEventos(1).get(pos1);
+               PromoEvento promo= Data.promociones.get(pos1);
                 binding.setPromoevento(promo);
                 Log.d("mama",promo.getFecha());
                 }

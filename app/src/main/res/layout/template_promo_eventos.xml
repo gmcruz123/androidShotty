@@ -44,6 +44,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:scaleType="centerCrop"
                     app:imgUrl="@{promoevento.imagen}"
                     android:id="@+id/img"
                     android:layout_width="0dp"

@@ -25,6 +25,17 @@
     <string name="promociones">Promociones</string>
     <string name="reservas">Reservas</string>
     <string name="synopsis">detalle</string>
+    <string name="menu">menu</string>
+
+    <string-array name="Ocasiones">
+        <item>Cumpleaños</item>
+        <item>Negocios</item>
+        <item>Romantica</item>
+        <item>Aniversario</item>
+        <item>Graduacion</item>
+        <item>Casual</item>
+        <item>Otro</item>
+    </string-array>
 
 
 </resources>

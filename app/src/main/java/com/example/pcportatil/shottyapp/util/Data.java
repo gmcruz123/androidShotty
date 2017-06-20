@@ -7,18 +7,76 @@ import com.example.pcportatil.shottyapp.models.Restaurante;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Retrofit;
+
 /**
  * Created by PC portatil on 07/06/2017.
  */
 
 public class Data {
 
-    private static List<Restaurante> restaurantes;
-    private static List<Restaurante> discotecas;
-    private static  List<PromoEvento> promociones;
-    private static  List<Reserva> reservas;
-    private static  List<PromoEvento> eventos;
-     public static int tipo =0;
+
+    public static List<Restaurante> restaurantes;
+    public static List<Restaurante> discotecas;
+    public static  List<PromoEvento> promociones;
+    public static  List<Reserva> reservas;
+    public static  List<PromoEvento> eventos;
+    public static List<Integer> days ;
+    public static List<Integer> horasini ;
+    public static List<Integer> horasfin;
+    public static List<Integer> days1; //disco
+    public static List<Integer> horasini1;
+    public  static List<Integer> horasfin1;
+
+
+
+
+    public static List<Integer> getDays() {
+        days.add(5);
+        days.add(6);
+        days.add(7);
+        return days;
+    }
+
+    public static List<Integer> getHorasini() {
+        horasini = new ArrayList<>();
+        horasini.add(12);
+        horasini.add(12);
+        horasini.add(11);
+        return horasini;
+    }
+
+    public static List<Integer> getHorasfin() {
+        horasfin = new ArrayList<>();
+        horasfin.add(25);
+        horasfin.add(16);
+        horasfin.add(23);
+        return horasfin;
+    }
+
+    public static List<Integer> getDays1() {
+        days1 = new ArrayList<>();
+        days1.add(4);
+        days1.add(5);
+        return days1;
+    }
+
+    public static List<Integer> getHorasini1() {
+        horasini1 = new ArrayList<>();
+        horasini1.add(20);
+        horasini1.add(20);
+
+        return horasini1;
+    }
+
+    public static List<Integer> getHorasfin1(){
+        horasfin1 = new ArrayList<>();
+        horasfin1.add(28);
+        horasfin1.add(28);
+        return horasfin1;
+    }
+
+    /*    public static int tipo =0;
 
     public static List<Restaurante> getRestaurantes(int i ){
         if (i==2) {
@@ -112,7 +170,7 @@ public class Data {
             if (promociones == null) {
                 promociones = new ArrayList<>();
                 PromoEvento p1 = new PromoEvento();
-                p1.setImagen("https://d1bq5g7z9i92ue.cloudfront.net/pictures/12/47/124730/Jazz.jpg");
+                p1.setImagen("http://www.universalmusica.com/wp-content/uploads/2015/09/daddy-yankee-sc3adgueme-y-te-sigo-daddy-yankee-video-oficial-video-import-640x360.jpg");
                 p1.setLugar("Nicky jam");
                 p1.setDescrip("bugga bugga  ");
                 p1.setFecha("12/02/2017");
@@ -136,7 +194,7 @@ public class Data {
         if (reservas == null){
             reservas = new ArrayList<>();
             Reserva p1 = new Reserva();
-            p1.setImagen("https://d1bq5g7z9i92ue.cloudfront.net/pictures/12/47/124730/Jazz.jpg");
+            p1.setImagen("http://www.billboard.com/files/media/Daddy-Yankee-Shaky-Shaky-baby-YIM-2016-billboard-1548.jpg");
             p1.setLugar("Boogie boogie");
             p1.setFecha("12/02/2017");
             p1.setHora("12:00");
@@ -151,5 +209,5 @@ public class Data {
 
 
 
-
+*/
 }

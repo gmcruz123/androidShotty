@@ -3,6 +3,8 @@ package com.example.pcportatil.shottyapp;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.example.pcportatil.shottyapp.models.Restaurante;
+import com.example.pcportatil.shottyapp.util.Data;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,7 +13,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    public  static  float latitud;
+    public  static  float longitud;
+    public static String nombre;
     private GoogleMap mMap;
 
     @Override
@@ -22,15 +26,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
+        if (getIntent().getExtras() != null) {
+
+            int pos = getIntent().getExtras().getInt("pos");
+            int pos2 = getIntent().getExtras().getInt("pos2");
+
+
+            if (pos == -1) {
+               latitud = Data.restaurantes.get(pos2).getLatitud();
+                longitud = Data.restaurantes.get(pos2).getLongitud();
+                nombre = Data.restaurantes.get(pos2).getNombre();
+
+            } else {
+                latitud = Data.discotecas.get(pos).getLatitud();
+                longitud = Data.discotecas.get(pos).getLongitud();
+                nombre = Data.discotecas.get(pos).getNombre();
+
+
+            }
+
+
+        }
+    }
 
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
      * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
+     * If Google Play services is not installed on the device, the user w
+     * ill be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
@@ -39,8 +65,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+        mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+
+
+        LatLng sydney = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(sydney).title(nombre));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16));
     }
 }

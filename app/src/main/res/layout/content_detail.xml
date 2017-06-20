@@ -7,116 +7,168 @@
 
     <data>
         <variable
+            name="handler"
+            type="com.example.pcportatil.shottyapp.DetailActivity"/>
+
+        <variable
             name="Restaurante"
             type="com.example.pcportatil.shottyapp.models.Restaurante"/>
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/small">
+        android:orientation="vertical"
+        android:paddingTop="@dimen/small">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/small">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/icon_estreno"
-                    android:layout_width="@dimen/icon"
-                    android:layout_height="@dimen/icon"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/icon_duracion"
-                    app:srcCompat="@drawable/ic_date"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="8dp" />
-
-                <ImageView
-                    android:id="@+id/icon_duracion"
-                    android:layout_width="@dimen/icon"
-                    android:layout_height="@dimen/icon"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_time" />
-
-                <TextView
-                    android:id="@+id/duracion"
+                <Button
+                    android:id="@+id/menu"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_restaurant_menu"
+                    android:text="@string/menu"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/horario"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/horario"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:drawableLeft="@drawable/ic_access_time"
+                    android:text="horario"
+                    app:layout_constraintLeft_toRightOf="@+id/menu"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/textInputLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hora">
+
+                    <EditText
+                        android:id="@+id/personas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Numero de personas"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+                </android.support.design.widget.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="0dp"
+                    android:layout_height="28dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:entries="@array/Ocasiones"
+                    android:spinnerMode="dropdown"
+                    android:visibility="visible"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+
+                <Button
+                    android:id="@+id/fecha"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
+                    android:layout_width="54dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/cardview_light_background"
+                    android:paddingLeft="0dp"
+                    android:text="Fecha"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/menu" />
+
+                <Button
+                    android:id="@+id/hora"
+                    style="@android:style/Widget.Material.Light.Button.Borderless"
+                    android:layout_width="67dp"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Hora"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fecha"
+                    tools:layout_editor_absoluteY="115dp" />
+
+                <TextView
+                    android:id="@+id/fecha1"
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
                     android:layout_marginBottom="0dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/icon_duracion"
-                    app:layout_constraintLeft_toRightOf="@+id/icon_duracion"
+                    android:layout_marginTop="8dp"
+
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/fecha"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toRightOf="@+id/fecha"
                     app:layout_constraintRight_toRightOf="parent"
-                    tools:text="Duracion"
-                    android:text="@{Restaurante.nombre}"/>
+                    app:layout_constraintTop_toTopOf="@+id/fecha" />
 
                 <TextView
-                    android:id="@+id/estreno"
+                    android:id="@+id/hora1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="-1dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/icon_estreno"
-                    app:layout_constraintLeft_toRightOf="@+id/icon_estreno"
+
+                    android:layout_marginTop="8dp"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="@+id/hora"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toRightOf="@+id/hora"
                     app:layout_constraintRight_toRightOf="parent"
-                    tools:text="Fecha de Estreno"
-                    android:text="@{Restaurante.likes}"
-                    />
-            </android.support.constraint.ConstraintLayout>
-        </android.support.v7.widget.CardView>
+                    app:layout_constraintTop_toTopOf="@+id/hora" />
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/small">
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/synopsis"
-                    android:layout_width="0dp"
+                <Button
+                    android:id="@+id/reservar1"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
+                    android:text="Reservar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title_synopsis"
-                    tools:text="Descripción"
-                    android:text="@{Restaurante.placeid}"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
-                <TextView
-                    android:id="@+id/title_synopsis"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/synopsis"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
             </android.support.constraint.ConstraintLayout>
+
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
