@@ -3,6 +3,7 @@ package com.example.pcportatil.shottyapp;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.example.pcportatil.shottyapp.databinding.ActivityDetailBinding;
 import com.example.pcportatil.shottyapp.databinding.ActivityMainBinding;
 import com.example.pcportatil.shottyapp.models.Reserva;
+import com.example.pcportatil.shottyapp.models.ReservaDao;
 import com.example.pcportatil.shottyapp.models.Restaurante;
 import com.example.pcportatil.shottyapp.net.ReservaClient;
 import com.example.pcportatil.shottyapp.net.SimpleResponse;
@@ -56,15 +58,19 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public static String opcion;
     private static String lugar;
     private static String imagen;
-    private static String fechafinal;
-    private static String horafinal;
+    private static String fechafinal="";
+    private static String horafinal="";
     ReservaClient client;
-
+    ProgressDialog progressDialog;
+    ReservaDao dao;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_detail);
+
+
+        dao = ((App)getApplication()).session.getReservaDao();
         client = ( (App)getApplication()).retrofit.create(ReservaClient.class);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_detail);
         setSupportActionBar(binding.toolbar);
@@ -243,32 +249,77 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         opcion = opciones.getSelectedItem().toString();
         Log.i("dedos","asdad"+opcion);
 
-        Reserva reserva = new Reserva(lugar,imagen,fechafinal,horafinal,personas.getText().toString(),opcion,idusu);
+        if (fechafinal.equals("")|| horafinal.equals("")||personas.getText().toString().equals("")) {
 
-        Call<SimpleResponse> request = client.reservacion(reserva);
-        request.enqueue(this);
+        Toast.makeText(this,"Por favor llene todos los campos", Toast.LENGTH_SHORT).show();
+        }
 
+        else {
+
+
+             Reserva reserva = new Reserva(lugar, imagen, fechafinal, horafinal, personas.getText().toString(), opcion, idusu);
+
+            Call<SimpleResponse> request = client.reservacion(reserva);
+            request.enqueue(this);
+            progressDialog = new ProgressDialog(this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.activity_progress);
+
+            final int totalProgressTime = 100;
+            final Thread t = new Thread() {
+                @Override
+                public void run() {
+                    int jumpTime = 0;
+
+                    while(jumpTime < totalProgressTime) {
+                        try {
+                            sleep(200);
+                            jumpTime += 5;
+                            progressDialog.setProgress(jumpTime);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };t.start();
+
+
+
+
+        }
     }
 
 
     @Override
     public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response) {
+
+        SharedPreferences preferences;
+        preferences = getSharedPreferences(Preference.PREFERENCE_NAME,MODE_PRIVATE);
+        String idusu = preferences.getString(Preference.KEY_USERID,"");
+
+        opcion = opciones.getSelectedItem().toString();
+        Reserva reserva = new Reserva(lugar, imagen, fechafinal, horafinal, personas.getText().toString(), opcion, idusu);
+
+
         if (response.isSuccessful()){
             SimpleResponse simpleResponse = response.body();
             if (simpleResponse.isSuccess()){
-
-                Toast.makeText(this,simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                progressDialog.dismiss();
+                dao.insert(reserva);
+                Toast.makeText(this, R.string.reservabien,Toast.LENGTH_SHORT).show();
 
 
             }else {
-
-                Toast.makeText(this,simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                progressDialog.dismiss();
+                Toast.makeText(this, R.string.reservamal,Toast.LENGTH_SHORT).show();
             }
 
         }
 
         else{
-            Toast.makeText(this,"No se ha encontrado reservas",Toast.LENGTH_SHORT);
+            progressDialog.dismiss();
+            Toast.makeText(this,R.string.reservamal,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -278,9 +329,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onFailure(Call<SimpleResponse> call, Throwable t) {
+        progressDialog.dismiss();
 
-
-        Toast.makeText(this,"Por favor revise su conexion a Internet",Toast.LENGTH_SHORT);
+        Toast.makeText(this,"Por favor revise su conexion a Internet",Toast.LENGTH_SHORT).show();
 
     }
 }

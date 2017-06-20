@@ -6,4 +6,5 @@
     <color name="red">#d50000</color>
     <color name="blue">#0091ea</color>
     <color name="img">#333333</color>
+    <color name="light">#ffffff</color>
 </resources>

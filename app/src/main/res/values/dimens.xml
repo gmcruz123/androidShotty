@@ -7,4 +7,5 @@
     <dimen name="dime_icons">24dp</dimen>
     <dimen name="small">10dp</dimen>
     <dimen name="icon">30dp</dimen>
+    <dimen name="corners">5dp</dimen>
 </resources>

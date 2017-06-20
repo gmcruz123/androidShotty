@@ -1,11 +1,31 @@
 package com.example.pcportatil.shottyapp.models;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
 /**
  * Created by PC portatil on 10/06/2017.
  */
 
+@Entity
 public class Reserva {
+    @Id(autoincrement = true)
+    Long id;
+
+
     String lugar, imagen, fecha, hora, personas, ocasion, idUsu;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+
 
     public Reserva(String lugar, String imagen, String fecha, String hora, String personas, String ocasion, String idUsu) {
         this.lugar = lugar;
@@ -15,6 +35,25 @@ public class Reserva {
         this.personas = personas;
         this.ocasion = ocasion;
         this.idUsu = idUsu;
+    }
+
+
+    @Generated(hash = 1163275905)
+    public Reserva(Long id, String lugar, String imagen, String fecha, String hora, String personas, String ocasion,
+            String idUsu) {
+        this.id = id;
+        this.lugar = lugar;
+        this.imagen = imagen;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.personas = personas;
+        this.ocasion = ocasion;
+        this.idUsu = idUsu;
+    }
+
+
+    @Generated(hash = 961270578)
+    public Reserva() {
     }
 
     public void setLugar(String lugar) {

@@ -28,7 +28,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/menu"
@@ -36,6 +36,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/ic_restaurant_menu"
                     android:text="@string/menu"
@@ -48,6 +49,7 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/ic_access_time"
@@ -61,7 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -83,8 +85,10 @@
                     android:id="@+id/spinner2"
                     android:layout_width="0dp"
                     android:layout_height="28dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:entries="@array/Ocasiones"
                     android:spinnerMode="dropdown"
@@ -97,37 +101,41 @@
                 <Button
                     android:id="@+id/fecha"
                     style="@android:style/Widget.Material.Light.Button.Borderless"
-                    android:layout_width="54dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_width="58dp"
+                    android:layout_height="42dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/cardview_light_background"
                     android:paddingLeft="0dp"
                     android:text="Fecha"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/menu" />
+                    app:layout_constraintTop_toBottomOf="@+id/menu"
+                    tools:layout_editor_absoluteY="67dp"
+                    tools:layout_editor_absoluteX="14dp" />
 
                 <Button
                     android:id="@+id/hora"
                     style="@android:style/Widget.Material.Light.Button.Borderless"
-                    android:layout_width="67dp"
-                    android:layout_height="37dp"
-                    android:layout_marginLeft="0dp"
+                    android:layout_width="70dp"
+                    android:layout_height="47dp"
                     android:layout_marginTop="8dp"
                     android:text="Hora"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fecha"
-                    tools:layout_editor_absoluteY="115dp" />
+                    tools:layout_editor_absoluteY="117dp"
+                    android:layout_marginLeft="0dp" />
 
                 <TextView
                     android:id="@+id/fecha1"
                     android:layout_width="0dp"
                     android:layout_height="17dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginTop="8dp"
 
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/fecha"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -139,10 +147,11 @@
                     android:id="@+id/hora1"
                     android:layout_width="0dp"
                     android:layout_height="17dp"
-                    android:layout_marginBottom="-1dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
 
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/hora"
@@ -154,17 +163,18 @@
                 <Button
                     android:id="@+id/reservar1"
                     style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Reservar"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner2"
+                    app:layout_constraintHorizontal_bias="0.0" />
 
 
             </android.support.constraint.ConstraintLayout>

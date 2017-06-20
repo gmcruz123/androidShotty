@@ -26,6 +26,16 @@
     <string name="reservas">Reservas</string>
     <string name="synopsis">detalle</string>
     <string name="menu">menu</string>
+    <string name="username">username</string>
+    <string name="email">Email</string>
+    <string name="registro_existente">El nombre de usuario ya se encuentra registrado</string>
+    <string name="error_servidor_registro">Fallo conexion a Internet</string>
+    <string name="cargando">Cargando</string>
+    <string name="falla">Fallo el servidor</string>
+    <string name="errorcontra">Contraseña erronea</string>
+    <string name="like">Me gusta</string>
+    <string name="reservabien">Reserva registrada</string>
+    <string name="reservamal">Reserva no registrada</string>
 
     <string-array name="Ocasiones">
         <item>Cumpleaños</item>

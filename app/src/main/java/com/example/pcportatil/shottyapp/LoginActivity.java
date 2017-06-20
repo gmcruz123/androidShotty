@@ -1,5 +1,6 @@
 package com.example.pcportatil.shottyapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<SimpleR
     ActivityLoginBinding binding;
     UsersClient client;
     SharedPreferences preferences;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,30 @@ public class LoginActivity extends AppCompatActivity implements Callback<SimpleR
         Call<SimpleResponse> request = client.login(user);
         request.enqueue(this);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.activity_progress);
+
+        final int totalProgressTime = 100;
+        final Thread t = new Thread() {
+            @Override
+            public void run() {
+                int jumpTime = 0;
+
+                while(jumpTime < totalProgressTime) {
+                    try {
+                        sleep(200);
+                        jumpTime += 5;
+                        progressDialog.setProgress(jumpTime);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };t.start();
+
+
 
     }
 
@@ -72,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<SimpleR
         if (response.isSuccessful()){
             SimpleResponse simpleResponse = response.body();
             if (simpleResponse.isSuccess()){
+                progressDialog.dismiss();
                 String userId = simpleResponse.usersget().get_Id();
                 SharedPreferences.Editor editor = preferences.edit();
 
@@ -85,14 +113,14 @@ public class LoginActivity extends AppCompatActivity implements Callback<SimpleR
                 startActivity(intent);
                 finish();
             }else {
-
-                Toast.makeText(this,simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                progressDialog.dismiss();
+                Toast.makeText(this, R.string.errorcontra,Toast.LENGTH_SHORT).show();
             }
 
         }
 
         else{
-            Toast.makeText(this,"holanda",Toast.LENGTH_SHORT);
+            Toast.makeText(this, R.string.falla,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -102,6 +130,6 @@ public class LoginActivity extends AppCompatActivity implements Callback<SimpleR
 
     @Override
     public void onFailure(Call<SimpleResponse> call, Throwable t) {
-        Toast.makeText(this,"holanda",Toast.LENGTH_SHORT);
+        Toast.makeText(this,R.string.error_servidor_registro,Toast.LENGTH_SHORT);
     }
 }

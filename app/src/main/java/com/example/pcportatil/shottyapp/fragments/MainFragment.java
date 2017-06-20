@@ -26,6 +26,7 @@ import com.example.pcportatil.shottyapp.databinding.FragmentMainBinding;
 import com.example.pcportatil.shottyapp.models.Like;
 import com.example.pcportatil.shottyapp.models.PromoEvento;
 import com.example.pcportatil.shottyapp.models.Reserva;
+import com.example.pcportatil.shottyapp.models.ReservaDao;
 import com.example.pcportatil.shottyapp.models.Restaurante;
 import com.example.pcportatil.shottyapp.net.ReservaClient;
 import com.example.pcportatil.shottyapp.net.RestaurantesClient;
@@ -56,6 +57,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
     RestaurantesClient client;
     ReservaClient client2;
     SharedPreferences preferences;
+    ReservaDao dao;
 
 
     @Override
@@ -131,6 +133,8 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
         //endregion
         client2 = App.retrofit.create(ReservaClient.class);
         client = App.retrofit.create(RestaurantesClient.class);
+        dao = App.session.getReservaDao();
+
         return binding.getRoot();
 
     }
@@ -211,8 +215,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
             @Override
             public void onFailure(Call<List<Restaurante>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("hola", "" + 12);
+                Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -237,8 +240,11 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
             @Override
             public void onFailure(Call<List<Reserva>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("hola", "" + 12);
+                Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
+                List<Reserva> all = dao.loadAll();
+                Data.reservas = all;
+                adapter2.setData(Data.reservas);
+
             }
 
         });
@@ -268,6 +274,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
             @Override
             public void onFailure(Call<List<Restaurante>> call, Throwable t) {
+                Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
 
             }
 
@@ -297,8 +304,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
             @Override
             public void onFailure(Call<List<PromoEvento>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("hola", "" + 12);
+                Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -327,8 +333,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
             @Override
             public void onFailure(Call<List<PromoEvento>> call, Throwable t) {
-                t.printStackTrace();
-                Log.d("hola", "" + 12);
+                Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -353,7 +358,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
         }
         startActivity(intent);
         int val = intent.getExtras().getInt("pos");
-        Log.d("hola", "" + val);
+
 
 
     }
@@ -402,7 +407,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
     public void onLikesClick(int position, int tipoArray) {
         Intent intent = new Intent(getActivity(), MapsActivity.class);
         int likes;
-        String nombre;
+        final String nombre;
         Log.i("tipoArray", "" + tipoArray);
 
         if (tipoArray == 2) {
@@ -419,12 +424,12 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
                         SimpleResponse simpleResponse = response.body();
                         if (simpleResponse.isSuccess()){
 
-                            Toast.makeText(getActivity(),simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                            Toast.makeText(getActivity(),"Me gusta "+nombre,Toast.LENGTH_SHORT).show();
 
 
                         }else {
 
-                            Toast.makeText(getActivity(),simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                            Toast.makeText(getActivity(),"Me gusta "+nombre,Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -434,8 +439,8 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
                 @Override
                 public void onFailure(Call<SimpleResponse> call, Throwable t) {
-                    t.printStackTrace();
-                    Log.d("hola", "" + 12);
+                    Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
+
                 }
 
             });
@@ -457,12 +462,12 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
                         SimpleResponse simpleResponse = response.body();
                         if (simpleResponse.isSuccess()){
 
-                            Toast.makeText(getActivity(),simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                            Toast.makeText(getActivity(), "Me gusta "+nombre,Toast.LENGTH_SHORT).show();
 
 
                         }else {
 
-                            Toast.makeText(getActivity(),simpleResponse.getMsg(),Toast.LENGTH_SHORT);
+                            Toast.makeText(getActivity(),"Me gusta "+nombre,Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -472,8 +477,7 @@ public class MainFragment extends Fragment implements RestauranteAdapter.onResta
 
                 @Override
                 public void onFailure(Call<SimpleResponse> call, Throwable t) {
-                    t.printStackTrace();
-                    Log.d("hola", "" + 12);
+               Toast.makeText(getActivity(),R.string.error_servidor_registro,Toast.LENGTH_SHORT).show();
                 }
 
             });
