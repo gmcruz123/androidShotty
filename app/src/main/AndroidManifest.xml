@@ -50,8 +50,12 @@
         <activity
             android:name=".DetailPromoActivity"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".RegisterActivity"
-            android:theme="@style/NoActionBar"
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu"
             ></activity>
     </application>
 

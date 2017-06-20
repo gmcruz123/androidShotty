@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -12,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -39,9 +41,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener, Callback<SimpleResponse> {
+    //region declaraciones
     ActivityDetailBinding binding;
     Spinner opciones;
-    Button btnfecha, btnhora,btnreservar;
+    Button btnfecha, btnhora,btnreservar, btnmenu, btnhorario;
     TextView fecha, hora;
     EditText personas;
     private int dia;
@@ -63,6 +66,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     ReservaClient client;
     ProgressDialog progressDialog;
     ReservaDao dao;
+    //endregion
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         client = ( (App)getApplication()).retrofit.create(ReservaClient.class);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_detail);
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Calendar cal = Calendar.getInstance();
         dia = cal.get(Calendar.DAY_OF_MONTH) ;
         mes1= cal.get(Calendar.MONTH)+1;
@@ -105,7 +111,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
 
         }
-
+        //region botones, textviews, spinner
+        btnhorario = (Button) findViewById(R.id.horario);
         btnfecha = (Button) findViewById(R.id.fecha);
         btnhora = (Button) findViewById(R.id.hora);
         hora = (TextView) findViewById(R.id.hora1);
@@ -113,15 +120,20 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         opciones = (Spinner) findViewById(R.id.spinner2);
         btnreservar = (Button) findViewById(R.id.reservar1);
         personas = (EditText) findViewById(R.id.personas);
-
+        btnmenu = (Button) findViewById(R.id.menu);
+        btnhorario.setOnClickListener(this);
+        btnmenu.setOnClickListener(this);
         btnfecha.setOnClickListener(this);
         btnhora.setOnClickListener(this);
         btnreservar.setOnClickListener(this);
+        //endregion
 
     }
 
+    //region MetodoOnclick
     @Override
     public void onClick(View view) {
+        //region Alerts para validar fechas
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("¡Fecha vencida!");
 
@@ -136,6 +148,30 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         builder1.setMessage("Por favor revise los horarios de Atencion del lugar");
         builder1.setPositiveButton("Aceptar",null);
         final Dialog dialog1 = builder1.create();
+        //endregion
+
+        AlertDialog.Builder Horariores = new AlertDialog.Builder(this);
+        Horariores.setTitle("Horario de Atencion");
+        String[] horario1 = {"Lunes: 12:00 PM - 11:59 PM ","Martes: 12:00 PM - 11:59 PM ","Miercoles: 12:00 PM - 11:59 PM ","Jueves: 12:00 PM - 11:59 PM ","Viernes: 12:00 PM - 11:59 PM ","Sabado: 12:00 PM - 11:59 PM ","Domingo: 12:00 PM - 11:59 PM "};
+        Horariores.setItems(horario1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                          }
+        });
+        Horariores.setPositiveButton("Cerrar", null);
+        final Dialog dialog2 = Horariores.create();
+
+
+        AlertDialog.Builder Horariodis = new AlertDialog.Builder(this);
+        Horariodis.setTitle("Horario de Atencion");
+        String[] horario2 = {"Lunes: 08:00 PM - 11:59 PM","Martes: 08:00 PM - 11:59 PM","Miercoles: 08:00 PM - 11:59 PM","Jueves: 08:00 PM - 11:59 PM","Viernes: 08:00 PM - 11:59 PM","Sabado: 08:00 PM - 11:59 PM","Domingo: 08:00 PM - 11:59 PM"};
+        Horariodis.setItems(horario2, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        Horariodis.setPositiveButton("Cerrar",null);
+        final  Dialog dialog3 = Horariodis.create();
 
         if (view == btnfecha){
             Log.d("dedos","holanda");
@@ -235,9 +271,28 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             reservar();
         }
 
+        else if (view == btnmenu){
+
+            Intent intent = new Intent(this,MenuActivity.class);
+            startActivity(intent);
+        }
+
+        else {
+
+            if (tipo ==2) {
+
+                dialog2.show();
+            }
+
+            else {
+                dialog3.show();
+
+            }
+        }
 
 
     }
+    //endregion
 
 
 
@@ -333,5 +388,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         Toast.makeText(this,"Por favor revise su conexion a Internet",Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 }

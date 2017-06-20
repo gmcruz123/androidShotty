@@ -1,5 +1,7 @@
 package com.example.pcportatil.shottyapp.util;
 
+import android.view.Menu;
+
 import com.example.pcportatil.shottyapp.models.PromoEvento;
 import com.example.pcportatil.shottyapp.models.Reserva;
 import com.example.pcportatil.shottyapp.models.Restaurante;
@@ -27,16 +29,10 @@ public class Data {
     public static List<Integer> days1; //disco
     public static List<Integer> horasini1;
     public  static List<Integer> horasfin1;
+    public static List<com.example.pcportatil.shottyapp.models.Menu> menus;
 
 
 
-
-    public static List<Integer> getDays() {
-        days.add(5);
-        days.add(6);
-        days.add(7);
-        return days;
-    }
 
     public static List<Integer> getHorasini() {
         horasini = new ArrayList<>();
@@ -54,12 +50,6 @@ public class Data {
         return horasfin;
     }
 
-    public static List<Integer> getDays1() {
-        days1 = new ArrayList<>();
-        days1.add(4);
-        days1.add(5);
-        return days1;
-    }
 
     public static List<Integer> getHorasini1() {
         horasini1 = new ArrayList<>();
@@ -76,7 +66,61 @@ public class Data {
         return horasfin1;
     }
 
-    /*    public static int tipo =0;
+    public static List<com.example.pcportatil.shottyapp.models.Menu> getMenus() {
+        menus = new ArrayList<>();
+         com.example.pcportatil.shottyapp.models.Menu menu1 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu1.setNombre("Hamburguesa");
+        menu1.setDescripcion("Hamburguesa doble queso, porcion de papas y adicion de guacamole");
+        menu1.setImagen("https://i.ytimg.com/vi/0xziF-uu0Cg/maxresdefault.jpg");
+        menu1.setPrecio("$ 18000");
+        menus.add(menu1);
+
+
+        com.example.pcportatil.shottyapp.models.Menu menu2 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu2.setNombre("Perro Caliente");
+        menu2.setDescripcion("Perro caliente doble queso, porcion de papas y adicion de guacamole");
+        menu2.setImagen("https://www.zenu.com.co/sites/default/files/recetas/receta-perro-con-agridulce-zenu.jpg");
+        menu2.setPrecio("$ 12000");
+        menus.add(menu2);
+
+
+        com.example.pcportatil.shottyapp.models.Menu menu3 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu3.setNombre("Sandwich");
+        menu3.setDescripcion("Sandwich doble queso, porcion de papas y adicion de guacamole");
+        menu3.setImagen("https://cubanosguru-3b6d.kxcdn.com/wp-content/uploads/2016/04/sandwich-cubano.jpg");
+        menu3.setPrecio("$ 18000");
+        menus.add(menu3);
+
+
+        com.example.pcportatil.shottyapp.models.Menu menu4 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu4.setNombre("Pollo apanado");
+        menu4.setDescripcion("Pollo apanado, porcion de papas y adicion de guacamole");
+        menu4.setImagen("http://www.mrpollo.com.ec/images/com_yoorecipe/originales/ninos/545_crocantes_horneadas.jpg");
+        menu4.setPrecio("$ 18000");
+        menus.add(menu4);
+
+
+        com.example.pcportatil.shottyapp.models.Menu menu5 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu5.setNombre("Pizza");
+        menu5.setDescripcion("La mejor pizza acompañada con salsa de ajo y mas ");
+        menu5.setImagen("https://www.elementstark.com/woocommerce-extension-demos/wp-content/uploads/sites/2/2016/12/pizza.jpg");
+        menu5.setPrecio("$ 14000");
+        menus.add(menu5);
+
+        com.example.pcportatil.shottyapp.models.Menu menu6 = new com.example.pcportatil.shottyapp.models.Menu();
+        menu6.setNombre("Carne asada");
+        menu6.setDescripcion("Carne asada con arroz, porcion de papas y adicion de guacamole");
+        menu6.setImagen("http://www.almomento.mx/wp-content/uploads/2014/07/carne-asada.jpg");
+        menu6.setPrecio("$ 28000");
+        menus.add(menu6);
+
+
+
+        return menus;
+    }
+
+
+/*    public static int tipo =0;
 
     public static List<Restaurante> getRestaurantes(int i ){
         if (i==2) {
